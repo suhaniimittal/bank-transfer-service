@@ -40,7 +40,7 @@ public class Account {
      * Ensure sufficient balance is available before withdrawing.
      */
     void withdraw(double amount) {
-        if (balance < amount) {
+        if (amount > balance) {
             throw new IllegalStateException("Insufficient funds");
         }
         balance -= amount;
