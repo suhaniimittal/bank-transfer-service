@@ -14,13 +14,16 @@ public class TransferService {
     /**
      * Move {@code amount} from {@code from} to {@code to}.
      *
-     * BUG: there's no check here that {@code amount} is actually positive.
-     * A caller can pass zero or a negative number straight through to
-     * withdraw/deposit below, which (combined with Account's own missing
-     * balance check) lets a "transfer" invent money out of nowhere instead
-     * of just moving it.
+     * @param from the account to transfer money from
+     * @param to the account to transfer money to
+     * @param amount the amount to transfer, must be positive
+     * @return the transaction record of this transfer
+     * @throws IllegalArgumentException if {@code amount} is non-positive
      */
     public Transaction transfer(Account from, Account to, double amount) {
+        if (amount <= 0) {
+            throw new IllegalArgumentException("Transfer amount must be positive");
+        }
         from.withdraw(amount);
         to.deposit(amount);
 
