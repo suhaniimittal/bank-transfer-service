@@ -35,11 +35,12 @@ public class Account {
     }
 
     /**
-     * BUG: this doesn't check anything before subtracting. Withdrawing more
-     * than the current balance should be refused, but instead the balance
-     * is just allowed to go negative (an unapproved overdraft).
+     * Withdraw the specified amount from the account if sufficient balance is available.
      */
     void withdraw(double amount) {
+        if (balance < amount) {
+            throw new IllegalStateException("Insufficient balance");
+        }
         balance -= amount;
     }
 
