@@ -40,6 +40,9 @@ public class Account {
      * is just allowed to go negative (an unapproved overdraft).
      */
     void withdraw(double amount) {
+        if (balance < amount) {
+            throw new IllegalStateException("Insufficient balance for withdrawal.");
+        }
         balance -= amount;
     }
 

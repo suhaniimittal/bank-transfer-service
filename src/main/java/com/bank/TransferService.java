@@ -21,6 +21,9 @@ public class TransferService {
      * of just moving it.
      */
     public Transaction transfer(Account from, Account to, double amount) {
+        if (amount <= 0) {
+            throw new IllegalArgumentException("Transfer amount must be positive and non-zero.");
+        }
         from.withdraw(amount);
         to.deposit(amount);
 
